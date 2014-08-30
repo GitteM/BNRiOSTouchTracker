@@ -19,6 +19,9 @@
 		ECBEFD1E19B2677A0030893F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECBEFD0619B2677A0030893F /* UIKit.framework */; };
 		ECBEFD2619B2677A0030893F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ECBEFD2419B2677A0030893F /* InfoPlist.strings */; };
 		ECBEFD2819B2677A0030893F /* TouchTrackerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ECBEFD2719B2677A0030893F /* TouchTrackerTests.m */; };
+		ECBEFD3419B269620030893F /* BNRLine.m in Sources */ = {isa = PBXBuildFile; fileRef = ECBEFD3319B269620030893F /* BNRLine.m */; };
+		ECBEFD3819B269FA0030893F /* BNRDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = ECBEFD3719B269FA0030893F /* BNRDrawView.m */; };
+		ECBEFD3F19B26AA30030893F /* BNRDrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECBEFD3E19B26AA30030893F /* BNRDrawViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +51,12 @@
 		ECBEFD2319B2677A0030893F /* TouchTrackerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TouchTrackerTests-Info.plist"; sourceTree = "<group>"; };
 		ECBEFD2519B2677A0030893F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		ECBEFD2719B2677A0030893F /* TouchTrackerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TouchTrackerTests.m; sourceTree = "<group>"; };
+		ECBEFD3219B269620030893F /* BNRLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BNRLine.h; path = Model/BNRLine.h; sourceTree = "<group>"; };
+		ECBEFD3319B269620030893F /* BNRLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BNRLine.m; path = Model/BNRLine.m; sourceTree = "<group>"; };
+		ECBEFD3619B269FA0030893F /* BNRDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRDrawView.h; sourceTree = "<group>"; };
+		ECBEFD3719B269FA0030893F /* BNRDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRDrawView.m; sourceTree = "<group>"; };
+		ECBEFD3D19B26AA30030893F /* BNRDrawViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRDrawViewController.h; sourceTree = "<group>"; };
+		ECBEFD3E19B26AA30030893F /* BNRDrawViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRDrawViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,8 +116,9 @@
 		ECBEFD0819B2677A0030893F /* TouchTracker */ = {
 			isa = PBXGroup;
 			children = (
-				ECBEFD1119B2677A0030893F /* BNRAppDelegate.h */,
-				ECBEFD1219B2677A0030893F /* BNRAppDelegate.m */,
+				ECBEFD3119B2691C0030893F /* ViewController */,
+				ECBEFD3919B26A1F0030893F /* View */,
+				ECBEFD3519B2696B0030893F /* Model */,
 				ECBEFD1419B2677A0030893F /* Images.xcassets */,
 				ECBEFD0919B2677A0030893F /* Supporting Files */,
 			);
@@ -142,6 +152,35 @@
 				ECBEFD2419B2677A0030893F /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		ECBEFD3119B2691C0030893F /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				ECBEFD3D19B26AA30030893F /* BNRDrawViewController.h */,
+				ECBEFD3E19B26AA30030893F /* BNRDrawViewController.m */,
+				ECBEFD1119B2677A0030893F /* BNRAppDelegate.h */,
+				ECBEFD1219B2677A0030893F /* BNRAppDelegate.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		ECBEFD3519B2696B0030893F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				ECBEFD3219B269620030893F /* BNRLine.h */,
+				ECBEFD3319B269620030893F /* BNRLine.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		ECBEFD3919B26A1F0030893F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				ECBEFD3619B269FA0030893F /* BNRDrawView.h */,
+				ECBEFD3719B269FA0030893F /* BNRDrawView.m */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -241,7 +280,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				ECBEFD0F19B2677A0030893F /* main.m in Sources */,
+				ECBEFD3F19B26AA30030893F /* BNRDrawViewController.m in Sources */,
+				ECBEFD3419B269620030893F /* BNRLine.m in Sources */,
 				ECBEFD1319B2677A0030893F /* BNRAppDelegate.m in Sources */,
+				ECBEFD3819B269FA0030893F /* BNRDrawView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
