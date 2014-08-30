@@ -10,7 +10,7 @@
 
 @interface BNRLine : NSObject
 
-@property (nonatomic) CGPoint start;
+@property (nonatomic) CGPoint begin;
 @property (nonatomic) CGPoint end;
 
 @end
