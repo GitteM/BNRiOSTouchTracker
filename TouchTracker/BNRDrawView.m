@@ -10,6 +10,7 @@
 #import "BNRLine.h"
 
 @interface BNRDrawView ()
+
 @property (strong, nonatomic) BNRLine *currentLine;
 @property (strong, nonatomic) NSMutableArray *finishedLines;
 
@@ -50,6 +51,45 @@
         [[UIColor redColor]set];
         [self strokeLine:self.currentLine];
     }
+}
+
+- (void)touchesBegan:(NSSet *)touches
+           withEvent:(UIEvent *)event {
+    
+    UITouch *t = [touches anyObject];
+    
+    // Get location of the touch in the view-coordinate system
+    CGPoint location = [t locationInView:self];
+    
+    self.currentLine = [[BNRLine alloc]init];
+    self.currentLine.begin = location;
+    self.currentLine.end = location;
+    
+    [self setNeedsDisplay];
+    
+}
+
+- (void)touchesMoved:(NSSet *)touches
+           withEvent:(UIEvent *)event {
+    
+    UITouch *t = [touches anyObject];
+    
+    CGPoint location = [t locationInView:self];
+    
+    self.currentLine.end = location;
+    
+    [self setNeedsDisplay];
+    
+}
+
+- (void)touchesEnded:(NSSet *)touches
+           withEvent:(UIEvent *)event {
+    
+    [self.finishedLines addObject:self.currentLine];
+    
+    self.currentLine = nil;
+    
+    [self setNeedsDisplay];
 }
 
 @end
