@@ -18,6 +18,8 @@
 
 @implementation BNRDrawView
 
+#pragma mark - Initialize
+
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -29,6 +31,8 @@
     }
     return self;
 }
+
+#pragma mark - Draw lines
 
 - (void)strokeLine:(BNRLine *)line {
     UIBezierPath *bp = [UIBezierPath bezierPath];
@@ -53,6 +57,8 @@
     }
     
 }
+
+#pragma mark - UIResponder methods
 
 - (void)touchesBegan:(NSSet *)touches
            withEvent:(UIEvent *)event {
@@ -107,6 +113,21 @@
         BNRLine *line = self.linesInProgress[key];
         
         [self.finishedLines addObject:line];
+        [self.linesInProgress removeObjectForKey:key];
+    }
+    
+    [self setNeedsDisplay];
+}
+
+
+- (void)touchesCancelled:(NSSet *)touches
+               withEvent:(UIEvent *)event {
+    
+    // let's put in a log statement to see the order of events
+    NSLog(@"%@", NSStringFromSelector(_cmd));
+    
+    for (UITouch *t in touches) {
+        NSValue *key = [NSValue valueWithNonretainedObject:t];
         [self.linesInProgress removeObjectForKey:key];
     }
     
