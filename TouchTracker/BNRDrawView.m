@@ -8,6 +8,7 @@
 
 #import "BNRDrawView.h"
 #import "BNRLine.h"
+#import "BNRLineStore.h"
 
 @interface BNRDrawView ()
 
@@ -26,6 +27,9 @@
     if (self) {
         self.linesInProgress = [[NSMutableDictionary alloc]init];
         self.finishedLines = [[NSMutableArray alloc]init];
+        if ([[[BNRLineStore sharedStore]allLines]count] > 0) {
+                [self.finishedLines addObjectsFromArray:[[BNRLineStore sharedStore]allLines]];
+        }
         self.backgroundColor = [UIColor grayColor];
         self.multipleTouchEnabled = YES;
     }
@@ -47,15 +51,15 @@
 - (void)drawRect:(CGRect)rect {
     // Draw finised lines in black
     [[UIColor blackColor]set];
-
+    
     for (BNRLine *line in self.finishedLines) {
         [self strokeLine:line];
+        [[BNRLineStore sharedStore]addLine:line];
     }
     
     for (NSValue *key in self.linesInProgress) {
         [self strokeLine:self.linesInProgress[key]];
     }
-    
 }
 
 #pragma mark - UIResponder methods
@@ -67,20 +71,19 @@
     NSLog(@"%@", NSStringFromSelector(_cmd));
     
     for (UITouch *t in touches) {
-    
+        
         CGPoint location = [t locationInView:self];
-
+        
         BNRLine *line = [[BNRLine alloc]init];
         line.begin = location;
         line.end = location;
-    
+        
         NSValue *key = [NSValue valueWithNonretainedObject:t];
         self.linesInProgress[key] = line;
-
+        
     }
     
-       [self setNeedsDisplay];
-    
+    [self setNeedsDisplay];
 }
 
 - (void)touchesMoved:(NSSet *)touches
@@ -109,10 +112,11 @@
     
     for (UITouch *t in touches) {
         NSValue *key = [NSValue valueWithNonretainedObject:t];
-
+        
         BNRLine *line = self.linesInProgress[key];
         
         [self.finishedLines addObject:line];
+        
         [self.linesInProgress removeObjectForKey:key];
     }
     

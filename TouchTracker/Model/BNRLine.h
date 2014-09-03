@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BNRLine : NSObject
+@interface BNRLine : NSObject <NSCoding>
 
 @property (nonatomic) CGPoint begin;
 @property (nonatomic) CGPoint end;

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EC39C76E19B78C7F00BF6DBD /* BNRLineStore.m in Sources */ = {isa = PBXBuildFile; fileRef = EC39C76D19B78C7F00BF6DBD /* BNRLineStore.m */; };
 		ECBEFD0319B2677A0030893F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECBEFD0219B2677A0030893F /* Foundation.framework */; };
 		ECBEFD0519B2677A0030893F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECBEFD0419B2677A0030893F /* CoreGraphics.framework */; };
 		ECBEFD0719B2677A0030893F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECBEFD0619B2677A0030893F /* UIKit.framework */; };
@@ -35,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EC39C76C19B78C7F00BF6DBD /* BNRLineStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRLineStore.h; sourceTree = "<group>"; };
+		EC39C76D19B78C7F00BF6DBD /* BNRLineStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRLineStore.m; sourceTree = "<group>"; };
 		ECBEFCFF19B2677A0030893F /* TouchTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TouchTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECBEFD0219B2677A0030893F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		ECBEFD0419B2677A0030893F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -170,6 +173,8 @@
 			children = (
 				ECBEFD3219B269620030893F /* BNRLine.h */,
 				ECBEFD3319B269620030893F /* BNRLine.m */,
+				EC39C76C19B78C7F00BF6DBD /* BNRLineStore.h */,
+				EC39C76D19B78C7F00BF6DBD /* BNRLineStore.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -281,6 +286,7 @@
 			files = (
 				ECBEFD0F19B2677A0030893F /* main.m in Sources */,
 				ECBEFD3F19B26AA30030893F /* BNRDrawViewController.m in Sources */,
+				EC39C76E19B78C7F00BF6DBD /* BNRLineStore.m in Sources */,
 				ECBEFD3419B269620030893F /* BNRLine.m in Sources */,
 				ECBEFD1319B2677A0030893F /* BNRAppDelegate.m in Sources */,
 				ECBEFD3819B269FA0030893F /* BNRDrawView.m in Sources */,
@@ -480,6 +486,7 @@
 				ECBEFD2D19B2677A0030893F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		ECBEFD2E19B2677A0030893F /* Build configuration list for PBXNativeTarget "TouchTrackerTests" */ = {
 			isa = XCConfigurationList;
@@ -488,6 +495,7 @@
 				ECBEFD3019B2677A0030893F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
