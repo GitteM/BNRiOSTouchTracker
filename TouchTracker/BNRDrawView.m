@@ -9,6 +9,7 @@
 #import "BNRDrawView.h"
 #import "BNRLine.h"
 #import "BNRLineStore.h"
+#import <math.h>
 
 @interface BNRDrawView ()
 
@@ -43,9 +44,35 @@
     bp.lineWidth = 10;
     bp.lineCapStyle = kCGLineCapRound;
     
+    UIColor *lineColor = [self colorOfLine:line];
+    [lineColor setStroke];
+    
     [bp moveToPoint:line.begin];
     [bp addLineToPoint:line.end];
     [bp stroke];
+}
+
+- (UIColor *)colorOfLine:(BNRLine *)line {
+
+    double deltaY = line.end.y - line.begin.y;
+    double deltaX = line.end.x - line.begin.x;
+    
+    double angleInDegrees = atan2(deltaY, deltaX) * 180 / M_PI;
+    
+    double threeSixty;
+    if (angleInDegrees < 0) {
+        threeSixty = 180 - angleInDegrees;
+    } else {
+        threeSixty = angleInDegrees;
+    }
+    
+    NSLog(@"%f", threeSixty );
+    UIColor *lineColor = [UIColor colorWithHue:threeSixty/360
+                                    saturation:1
+                                    brightness:1
+                                         alpha:1];
+    return lineColor;
+ 
 }
 
 - (void)drawRect:(CGRect)rect {
