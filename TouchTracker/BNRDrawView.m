@@ -48,7 +48,7 @@
     
     double threeSixty;
     if (angleInDegrees < 0) {
-        threeSixty = 180 - angleInDegrees;
+        threeSixty = 360 + angleInDegrees;
     } else {
         threeSixty = angleInDegrees;
     }
