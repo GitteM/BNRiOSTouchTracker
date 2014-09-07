@@ -9,8 +9,9 @@
 #import "BNRDrawView.h"
 #import "BNRLine.h"
 
-@interface BNRDrawView ()
+@interface BNRDrawView () <UIGestureRecognizerDelegate>
 
+@property (strong, nonatomic) UIPanGestureRecognizer *moveRecognizer;
 @property (strong, nonatomic) NSMutableDictionary *linesInProgress;
 @property (strong, nonatomic) NSMutableArray *finishedLines;
 
@@ -50,7 +51,15 @@
                                                       action:@selector(longPress:)];
         [self addGestureRecognizer:pressRecognizer];
         
+        self.moveRecognizer =
+        [[UIPanGestureRecognizer alloc]initWithTarget:self
+                                               action:@selector(moveLine:)];
+        self.moveRecognizer.delegate = self;
+        self.moveRecognizer.cancelsTouchesInView = NO;
+        [self addGestureRecognizer:self.moveRecognizer];
+        
     }
+    
     return self;
 }
 
@@ -248,4 +257,51 @@
         [self setNeedsDisplay];
     }
 }
+
+- (void)moveLine:(UIPanGestureRecognizer *)pgr {
+    
+    // no line selected, do nothing
+    if (!self.selectedLine) {
+        return;
+    }
+    
+    // when the pan recognizer changes its position...
+    if (pgr.state == UIGestureRecognizerStateChanged) {
+        
+        // how far has the pan moved
+        CGPoint translation = [pgr translationInView:self];
+        
+        // add the translation to the current beginning and end points of the line
+        CGPoint begin = [self.selectedLine begin];
+        CGPoint end = [self.selectedLine end];
+        
+        begin.x += translation.x;
+        begin.y += translation.y;
+        
+        end.x += translation.x;
+        end.y += translation.y;
+        
+        // set the new beginning and end point of the line
+        self.selectedLine.begin = begin;
+        self.selectedLine.end = end;
+        
+        // redraw the screen
+        [self setNeedsDisplay];
+        
+        [pgr setTranslation:CGPointZero inView:self];
+    }
+}
+
+#pragma mark - UIGestureRecognizerDelegate protocol method
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
+shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer; {
+    
+    if (gestureRecognizer == self.moveRecognizer) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
 @end
