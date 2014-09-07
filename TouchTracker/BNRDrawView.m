@@ -26,6 +26,13 @@
         self.finishedLines = [[NSMutableArray alloc]init];
         self.backgroundColor = [UIColor grayColor];
         self.multipleTouchEnabled = YES;
+        
+        UITapGestureRecognizer *doubleTapRecognizer =
+        [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                action:@selector(doubleTap:)];
+        doubleTapRecognizer.numberOfTapsRequired = 2;
+        doubleTapRecognizer.delaysTouchesBegan = YES;
+        [self addGestureRecognizer:doubleTapRecognizer];
     }
     return self;
 }
@@ -41,13 +48,13 @@
 }
 
 - (void)drawRect:(CGRect)rect {
-    // Draw finised lines in black
+    
     [[UIColor blackColor]set];
-
     for (BNRLine *line in self.finishedLines) {
         [self strokeLine:line];
     }
     
+    [[UIColor redColor]set];
     for (NSValue *key in self.linesInProgress) {
         [self strokeLine:self.linesInProgress[key]];
     }
@@ -61,19 +68,19 @@
     NSLog(@"%@", NSStringFromSelector(_cmd));
     
     for (UITouch *t in touches) {
-    
+        
         CGPoint location = [t locationInView:self];
-
+        
         BNRLine *line = [[BNRLine alloc]init];
         line.begin = location;
         line.end = location;
-    
+        
         NSValue *key = [NSValue valueWithNonretainedObject:t];
         self.linesInProgress[key] = line;
-
+        
     }
     
-       [self setNeedsDisplay];
+    [self setNeedsDisplay];
     
 }
 
@@ -103,13 +110,22 @@
     
     for (UITouch *t in touches) {
         NSValue *key = [NSValue valueWithNonretainedObject:t];
-
+        
         BNRLine *line = self.linesInProgress[key];
         
         [self.finishedLines addObject:line];
         [self.linesInProgress removeObjectForKey:key];
     }
     
+    [self setNeedsDisplay];
+}
+
+- (void)doubleTap:(UIGestureRecognizer *)gr {
+    
+    NSLog(@"Recognized double tap");
+    
+    [self.linesInProgress removeAllObjects];
+    [self.finishedLines removeAllObjects];
     [self setNeedsDisplay];
 }
 
