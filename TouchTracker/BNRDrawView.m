@@ -33,7 +33,7 @@
         
         UITapGestureRecognizer *doubleTapRecognizer =
         [[UITapGestureRecognizer alloc]initWithTarget:self
-                                                action:@selector(doubleTap:)];
+                                               action:@selector(doubleTap:)];
         doubleTapRecognizer.numberOfTapsRequired = 2;
         doubleTapRecognizer.delaysTouchesBegan = YES;
         [self addGestureRecognizer:doubleTapRecognizer];
@@ -44,6 +44,11 @@
         tapRecognizer.delaysTouchesBegan = YES;
         [tapRecognizer requireGestureRecognizerToFail:doubleTapRecognizer];
         [self addGestureRecognizer:tapRecognizer];
+        
+        UILongPressGestureRecognizer *pressRecognizer =
+        [[UILongPressGestureRecognizer alloc] initWithTarget:self
+                                                      action:@selector(longPress:)];
+        [self addGestureRecognizer:pressRecognizer];
         
     }
     return self;
@@ -98,7 +103,7 @@
 #pragma mark - Get a BNRLine close to a given point
 
 - (BNRLine *)lineAtPoint:(CGPoint)p {
-   
+    
     // find a line close to p
     for (BNRLine *line in self.finishedLines) {
         CGPoint start = line.begin;
@@ -216,7 +221,7 @@
         [menu setTargetRect:CGRectMake(point.x, point.y, 2, 2)
                      inView:self];
         [menu setMenuVisible:YES animated:YES];
-
+        
     } else {
         
         // hide menu if no line is selected
@@ -227,4 +232,20 @@
     [self setNeedsDisplay];
 }
 
+- (void)longPress:(UIGestureRecognizer *)gr {
+    
+    if (gr.state == UIGestureRecognizerStateBegan) {
+        
+        CGPoint point = [gr locationInView:self];
+        self.selectedLine = [self lineAtPoint:point];
+        
+        if (self.selectedLine) {
+            [self.linesInProgress removeAllObjects];
+        } else if (gr.state == UIGestureRecognizerStateEnded) {
+            self.selectedLine = nil;
+        }
+        
+        [self setNeedsDisplay];
+    }
+}
 @end
