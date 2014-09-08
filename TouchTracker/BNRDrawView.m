@@ -137,6 +137,10 @@
 - (void)touchesBegan:(NSSet *)touches
            withEvent:(UIEvent *)event {
     
+    if (self.selectedLine) {
+        return;
+    }
+    
     // Put a log statement to see the order of events
     NSLog(@"%@", NSStringFromSelector(_cmd));
     
@@ -160,6 +164,10 @@
 - (void)touchesMoved:(NSSet *)touches
            withEvent:(UIEvent *)event {
     
+    if (self.selectedLine) {
+        return;
+    }
+    
     // Let's put a log statement to see the order of events
     NSLog(@"%@", NSStringFromSelector(_cmd));
     
@@ -177,6 +185,10 @@
 
 - (void)touchesEnded:(NSSet *)touches
            withEvent:(UIEvent *)event {
+    
+    if (self.selectedLine) {
+        return;
+    }
     
     // Let's put a log statement to see the order of events
     NSLog(@"%@", NSStringFromSelector(_cmd));
@@ -265,6 +277,8 @@
         return;
     }
     
+    [[UIMenuController sharedMenuController]setMenuVisible:NO animated:NO];
+
     // when the pan recognizer changes its position...
     if (pgr.state == UIGestureRecognizerStateChanged) {
         
